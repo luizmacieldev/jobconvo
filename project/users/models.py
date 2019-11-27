@@ -6,7 +6,7 @@ PERFIL_CHOICES = (
 	(2,'empresa')
 )
 class CustomUser(AbstractUser):
-    perfil = models.PositiveSmallIntegerField(choices=PERFIL_CHOICES)
+    #perfil = models.PositiveSmallIntegerField(choices=PERFIL_CHOICES)
 
     def __str__(self):
         return self.email
