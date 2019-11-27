@@ -1,5 +1,5 @@
 from django.db import models
-from usuario.models import Candidatado
+from candidato.models import Candidatado
 from django.core.exceptions import ValidationError
 # Create your models here.
 FAIXA_SALARIAL_CHOICES = (
@@ -29,11 +29,11 @@ class Vaga(models.Model):
 
 class Candidatura(models.Model):
     vaga = models.ForeignKey('Vaga',on_delete=models.CASCADE)
-    usuario = models.ForeignKey('usuario.Candidatado',on_delete=models.CASCADE)
+    candidato = models.ForeignKey('candidato.Candidatado',on_delete=models.CASCADE)
 
 
     class Meta:
-        unique_together = ('vaga','usuario')
+        unique_together = ('vaga','candidato')
 
     def validate_unique(self,exclude=None):
         try:
