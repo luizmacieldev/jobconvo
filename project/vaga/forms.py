@@ -1,10 +1,8 @@
-'''from django import forms
-from .models import Candidatura
+from django import forms
+from .models import Vaga
 
 
-class CandidaturaForm(forms.ModelForm):
-
-
+class VagaForm(forms.ModelForm):
     class Meta:
-        model = Candidatura
-'''
+        model = Vaga
+        fields = ('empresa','nome_da_vaga','faixa_salarial','requisitos','escolaridade_minima')
