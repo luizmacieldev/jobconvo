@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+	<h1>Entrar</h1>
+	<form action="{% url 'user_login' %}">
+		<input type="text" name="username">
+		<br>
+		<input type="password" name="password">
+		<input type="submit" class="btn btn-info" value="Cadastrar">
+
+	</form>
+</div>
+
+{% endblock %}

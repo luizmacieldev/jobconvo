@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Candidatura
+
 # Register your models here.
 from .models import Vaga
 
@@ -9,4 +9,3 @@ class VagaAdmin(admin.ModelAdmin):
         model = Vaga 
 
 admin.site.register(Vaga,VagaAdmin)
-admin.site.register(Candidatura)

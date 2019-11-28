@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+	{% if cadastrado %}
+	<h1>Cadastrado com sucesso </h1>
+	
+	{% else %}
+	<h1>Faça seu Cadastro</h1>
+	<form method="POST">{% csrf_token %}
+		{{ candidato_form|crispy }}
+		{{ candidato_perfil_form|crispy}}
+		<input type="submit" class="btn btn-info" value="Cadastrar">
+	</form>
+	{% endif %}
+</div>
+
+{% endblock %}
