@@ -34,6 +34,7 @@ def lista_de_candidatos(request):
     return render(request,"candidato/lista_de_candidatos.html",{'candidatos':candidatos})
 
 def cadastro_candidato(request):
+    import pdb; pdb.set_trace();
     cadastrado = False
     if request.method == "POST":
         candidato_form        = CandidatoForm(data=request.POST)
@@ -54,6 +55,7 @@ def cadastro_candidato(request):
             candidato.save()
             #candidato ='user_id': 7, 'nome': 'aaaaaaaaaaaa', 'pretensao_salarial': 'De 1.000 a 2.000', 'escolaridade': 'Ensino médio'}
             cadastrado = True
+            redirect('lista_de_vagas')
         else:
             print(candidato_form.errors,candidato_perfil_form.errors)
     else:

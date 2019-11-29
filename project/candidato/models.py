@@ -9,4 +9,4 @@ class Candidato(models.Model):
 	escolaridade        = models.CharField(max_length=25,choices=ESCOLARIDADE_MINIMA_CHOICES)
     
 	def __str__(self):
-		return self.user.email
+		return self.user.username

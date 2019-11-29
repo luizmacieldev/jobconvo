@@ -1,15 +1,38 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block content %}	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card" style="width: 18rem;">
+					<img class="card-img-top" src="{% static 'img/01.jpg' %}" alt="Card image cap">
+					<div class="card-body">
+						<h5 class="card-title">Sou um candidato</h5>
+						<p class="card-text">Crie sua conta para se candidatar a vagas de emprego.</p>
+					</div>
+					<div class="card-body">
+						<a href="{% url 'cadastro_candidato' %}" class="card-link">Criar Conta</a>
+						<a href="{% url 'cadastro_candidato' %}" class="card-link">Fazer Login</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+					<div class="card" style="width: 18rem;">
+						<img class="card-img-top" src="{% static 'img/02.jpg' %}" alt="Card image cap">
+						<div class="card-body">
+							<h5 class="card-title">Sou uma Empresa</h5>
+							<p class="card-text">Possui vagas abertas na empresa ? Crie uma conta e poste vagas</p>
+						</div>
+						<div class="card-body">
+							<a href="{% url 'cadastro_empresa' %}" class="card-link">Criar Conta</a>
+							<a href="{% url 'cadastro_empresa' %}" class="card-link">Fazer Login</a>
+						</div>
+					</div>
+				</div>
+		</div>
+	</div>
+	
+</form>
 
-{% block content %}
-<div class="card">
-	<h1>Entrar</h1>
-	<form action="{% url 'user_login' %}">
-		<input type="text" name="username">
-		<br>
-		<input type="password" name="password">
-		<input type="submit" class="btn btn-info" value="Cadastrar">
-
-	</form>
-</div>
 
 {% endblock %}

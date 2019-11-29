@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="container">
+
+	<h1>Realize sua candidatura através do formulário abaixo: </h1>
+	<form method="POST">{% csrf_token %}
+		{{ form|crispy }}
+		<input type="submit" class="btn btn-info" value="Cadastrar">
+	</form>
+
+</div>
+
+{% endblock %}
