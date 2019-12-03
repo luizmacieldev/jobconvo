@@ -2,7 +2,7 @@
 Instruções para rodar o projeto
 
 
-1º instalar as dependências do requirements.txt (pip install -r requirements.txt)
+1º Entrar na pasta project e instalar as dependências do requirements.txt (pip install -r requirements.txt)
 
 2º fazer migrações:
 
@@ -10,7 +10,7 @@ Instruções para rodar o projeto
 
 	python manage migrate
 
-	python manage.py makemigrations empresa vaga candidatura
+	python manage.py makemigrations empresa vaga candidatura candidato
 
 	python manage.py migrate
 
