@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.shortcuts import reverse
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect,HttpResponse
-
+from django.contrib import messages
 # Create your views here.
 def cadastro_empresa(request):
 	cadastrado = False
@@ -15,7 +15,7 @@ def cadastro_empresa(request):
 		empresa_perfil_form  = EmpresaPerfilForm(data=request.POST)
 		if empresa_form.is_valid() and empresa_perfil_form.is_valid():
 			user = empresa_form.save()
-			user.is_staff = True
+			user.is_empresa = True
 			user.set_password(user.password)
 			user.save()
 
@@ -27,6 +27,8 @@ def cadastro_empresa(request):
 			empresa.save()
 
 			cadastrado = True
+			messages.success(request,'Empresa cadastrada com sucesso, por favor efetue o login')
+			return HttpResponseRedirect(reverse('empresa:login_empresa'))
 		else:
 			print(empresa_form.errors,candidato_perfil_form.errors)
 	else:
@@ -39,4 +41,22 @@ def cadastro_empresa(request):
 												})
 
 def login_empresa(request):
-	return render(request,"empresa/login.html",{})
+	if request.method=="POST":
+		username = request.POST.get('username')
+		password = request.POST.get('password')
+		user = authenticate(username=username,password=password)
+		if user:
+			if user.is_active:
+				login(request,user)
+				messages.success(request,"Login Realizado com sucesso")
+				return HttpResponseRedirect(reverse('pagina_inicial'))
+		else:
+			return HttpResponse('Erro usuário ou senha inválido')
+	return render(request,"login_empresa.html",{})
+
+
+@login_required
+def logout_empresa(request):
+	logout(request)
+	return HttpResponseRedirect(reverse('pagina_inicial'))
+

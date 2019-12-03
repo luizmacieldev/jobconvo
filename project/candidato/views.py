@@ -7,34 +7,35 @@ from django.contrib.auth import authenticate,login,logout
 from django.shortcuts import reverse
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect,HttpResponse
+from django.contrib import messages
 
 
-def candidato_login(request):
-    if request.method == "POST":
+def login_candidato(request):
+    if request.method=="POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(username=username,password=password)
+        if user:
+            if user.is_active:
+                login(request,user)
+                messages.success(request,'Usuario logado com sucesso')
+                return HttpResponseRedirect(reverse('pagina_inicial'))
+        else:
+            return HttpResponse('Erro usuário ou senha inválido')
+    return render(request,"login_candidato.html",{})
 
-        if user.is_active:
-            login(request,user)
+
+@login_required
+def logout_candidato(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('pagina_inicial'))
+
+
 def lista_de_candidatos(request):
     candidatos = Candidato.objects.all().order_by('-id')
-    #queryset = request.GET.get('q')
-
-    # if queryset:
-    #     clientes = Cliente.objects.filter(
-    #         Q(nome__icontains=queryset)|
-    #         Q(email__icontains=queryset)| # LIKE % ana %
-    #         Q(cpf__icontains=queryset)
-    #     )
-    # paginator = Paginator(clientes, 5) 
-    # page = request.GET.get('page')
-    # clientes = paginator.get_page(page)
-
     return render(request,"candidato/lista_de_candidatos.html",{'candidatos':candidatos})
 
 def cadastro_candidato(request):
-    import pdb; pdb.set_trace();
     cadastrado = False
     if request.method == "POST":
         candidato_form        = CandidatoForm(data=request.POST)
@@ -42,20 +43,19 @@ def cadastro_candidato(request):
 
         if candidato_form.is_valid() and candidato_perfil_form.is_valid():
             user = candidato_form.save()
+            user.is_candidato = True
             user.set_password(user.password)
             user.save()
-            
             candidato           = candidato_perfil_form.save(commit=False)
             candidato.user      = user
-            import pdb; pdb.set_trace();
             candidato.user_id = candidato.user.id
             candidato.nome = request.POST.get('nome')
             candidato.pretensao_salarial = request.POST.get('pretensao_salarial')
             candidato.escolaridade  =  request.POST.get('escolaridade')
             candidato.save()
-            #candidato ='user_id': 7, 'nome': 'aaaaaaaaaaaa', 'pretensao_salarial': 'De 1.000 a 2.000', 'escolaridade': 'Ensino médio'}
             cadastrado = True
-            redirect('lista_de_vagas')
+            messages.success(request,'Candidato cadastrado com sucesso, por favor faça o login')
+            return HttpResponseRedirect(reverse('candidato:login_candidato'))
         else:
             print(candidato_form.errors,candidato_perfil_form.errors)
     else:
@@ -65,14 +65,3 @@ def cadastro_candidato(request):
     return render(request,"cadastro_candidato.html",{'candidato_form':candidato_form,
                                                 'candidato_perfil_form':candidato_perfil_form,
                                                 'cadastrado':cadastrado})
-'''
-def adicionar_cliente(request):
-    form = ClienteForm(request.POST)
-    if form.is_valid():
-        obj = form.save()
-        obj.save()
-        form = ClienteForm()
-        messages.success(request,"Cliente adicionado com sucesso")
-        return redirect('lista_de_clientes')
-    return render(request,"clientes/adicionar_cliente.html",{'form':form})
-    '''

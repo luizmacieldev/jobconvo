@@ -1,37 +1,39 @@
 {% extends 'base.html' %}
 {% block content %}
 <ul>
-{% for vaga in lista_de_vagas %}
-<table class="table">
-    <thead>
-    <th>
-        <td>Empresa</td>
-        <td>Nome da vaga</td>
-        <td>Faixa Salarial</td>
-        {% if user.is_staff %}
-            <td>Editar</td>
-            <td>Excluir</td>
-        {% endif %}
-    </th>
-    </thead>
-    <tbody>
-        <tr>
-            <td>{{ vaga.empresa }}</td>
-            <td>{{ vaga.nome_da_vaga }}</td>
-            <td>{{ vaga.faixa_salarial }}</td>
-            <td>{{ vaga.faixa_salarial }}</td>
-            {% if user.is_staff %}
-            <td><a href="{{vaga.id}}" class="btn btn-warning">Editar </a></td>
-            <td><a href="{{vaga.id}}" class="btn btn-danger">Excluir </a></td>
-        {% endif %}
-        </tr>
-    </tbody>
-    {% if not user.is_staff %}
-       <a href="{{vaga.id}}" class="btn btn-info">Quero me candidatar a essa vaga </a>
-    {% endif %}
-    <hr />
+    {% for vaga in lista_de_vagas %}
+    <table class="table">
+        <thead>
+            <tr>
+                <td>Nome da vaga</td>
+                <td>Faixa Salarial</td>
+                <td>Escolaridade</td>
+                {% if user.is_empresa %}
+                <td>Editar</td>
+                <td>Excluir</td>
+                {% endif %}
 
-{% endfor %}
-</table>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td> <a href="../vaga_detalhe/{{vaga.id}}"> {{ vaga.nome_da_vaga }} </a></td>
+                <td>{{ vaga.faixa_salarial }}</td>
+                <td>{{ vaga.escolaridade_minima }}</td>
+                {% if user.is_empresa %}
+                <td><a href="../editar_vaga/{{vaga.id}}" class="btn btn-warning">Editar </a></td>
+                <td><a href="../excluir_vaga/{{vaga.id}}" class="btn btn-danger">Excluir </a></td>
+                {% endif %}
+                {% if user.is_candidato %}
+                <td><a href="../../candidatura/candidatar_vaga/{{ vaga.id }}" class="btn btn-info">Quero me candidatar a essa vaga </a></td>
+                {% endif %}
 
-{% endblock content %}
+            </tr>
+        </tbody>
+
+        <hr />
+
+        {% endfor %}
+    </table>
+
+    {% endblock content %}

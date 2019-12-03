@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+<h3 class="text-center text-info">Candidaturas Realizadas</h3>
+	{% for candidatura in candidaturas %}
+	<div class="card">
+  	<div class="card-body">
+    <h5 class="card-title">Vaga: {{ candidatura.vaga.nome_da_vaga }}</h5>
+    <p class="card-text">Candidato: {{ candidatura.candidato.nome }}</p>
+    <span>Pontos extras do candidato: {{ candidatura.bonus }}</span>
+    <div class="py-1"></div>
+  </div>
+</div>
+	{% endfor %}
+
+{% endblock %}

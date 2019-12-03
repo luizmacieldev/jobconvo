@@ -1,6 +1,8 @@
 from django import forms
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from .models import Candidato
+
+User = get_user_model()
 
 class CandidatoForm(forms.ModelForm):
 	password = forms.CharField(widget=forms.PasswordInput())

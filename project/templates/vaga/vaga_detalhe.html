@@ -1,4 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
-    {{ vaga }}
+<div class="container">
+	<ul class="list-group">
+		<li class="list-group-item"><strong>Vaga</strong>:{{ vaga.nome_da_vaga }}</li>
+		<li class="list-group-item"><strong>Salario</strong>:{{ vaga.faixa_salarial }}</li>
+		<li class="list-group-item"><strong>Requisitos</strong>:{{ vaga.requisitos }}</li>
+		<li class="list-group-item"><strong>Escolaridade</strong>:{{ vaga.escolaridade_minima }}</li>
+	</ul>
+</div>
 {% endblock %}

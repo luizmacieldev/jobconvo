@@ -42,9 +42,10 @@ INSTALLED_APPS = [
     'candidato',
     'vaga',
     'empresa',
+    'usuario',
     'candidatura',
     'crispy_forms',
-    
+
 
     ]
 
@@ -135,3 +136,5 @@ STATICFILES_DIRS = (
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+AUTH_USER_MODEL = 'usuario.User'
+

@@ -1,11 +1,12 @@
 from django.contrib import admin
 
-# Register your models here.
-from .models import Vaga
+# # Register your models here.
+# from .models import Vaga
 
-class VagaAdmin(admin.ModelAdmin):
-    list_display = ('nome_da_vaga','faixa_salarial','escolaridade_minima')
-    class Meta:
-        model = Vaga 
+# class VagaAdmin(admin.ModelAdmin):
+#     def save_model(self, request, obj, form, change):
+#         if not change:
+#             obj.criado_por = request.user
+#         obj.save()
 
-admin.site.register(Vaga,VagaAdmin)
+# admin.site.register(Vaga, VagaAdmin)
