@@ -10,7 +10,7 @@ Instruções para rodar o projeto
 
 	python manage migrate
 
-	python manage.py makemigrations empresa vaga candidatura
+	python manage.py makemigrations empresa vaga candidatura candidato
 
 	python manage.py migrate
 
