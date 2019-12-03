@@ -6,6 +6,8 @@ from candidato.models import Candidato
 from vaga.models import Vaga
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 
 
 
